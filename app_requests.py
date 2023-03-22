@@ -22,7 +22,7 @@ async def add(bot, message):
     await send("Iniciando")
     username = "Luis"
     password = "kdkdidi"
-    payload = {'username': username, 'password': password, 'rememberusername': 1} 
+    data = {'username': username, 'password': password, 'rememberusername': 1} 
     url = "https://eduvirtual.uho.edu.cu/login/index.php"
     s = requests.post(url, data=data)
     print(s.text)

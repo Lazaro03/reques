@@ -12,7 +12,7 @@ from pyrogram.handlers import MessageHandler
 
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
-bot_token = "5871277082:AAFsEc0clhaeJ0wokJVfGF0_P3P0385Sb0M"
+bot_token = "5897771276:AAHjxn9_D-ar3lHXxfEJAqjdwAdTp01Lw30"
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 
 @bot.on_message(filters.command('url') & filters.private & filters.incoming)
@@ -25,8 +25,9 @@ async def add(bot, message):
     data = {'username': username, 'password': password, 'rememberusername': 1} 
     url = "https://eduvirtual.uho.edu.cu/login/index.php"
     s = requests.get(url, data=data)
+    r = requests.Session.post(url, data=data)
     print(s.text)
-
+    print(r.tetx)
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

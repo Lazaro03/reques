@@ -8,4 +8,4 @@ def hello_world():
 
 #Ex https://Itz-zaid:ghp_147bkkabcdefgh@github.com/Itz-zaid/anything
 os.system("git clone https://lastvzs02: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@github.com/lastvzs02/File-To-link- oke && cd oke && pip3 install -U -r requirements.txt && nohup python3 main.py &")
-#os.system("git clone https://lastvzs02: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@github.com/lastvzs02/Dl-File oket && cd oket && pip3 install -U -r requirements.txt && nohup python3 -m main &")
+#os.system("git clone https://github.com/stvz21/request oket && cd oket && pip3 install -U -r requirements.txt && nohup python3 -m app_requests.py &")

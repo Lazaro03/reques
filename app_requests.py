@@ -20,7 +20,7 @@ async def add(bot, message):
     send = message.reply
     username = message.from_user.username
     await send("Iniciando")
-    username = "alejandropo@uho.edu.cu"
+    username = f"alejandropo@uho.edu.cu"
     password = "1234567m"
     data = {'username': username, 'password': password, 'rememberusername': 1} 
     url = "https://eduvirtual.uho.edu.cu/login/index.php"

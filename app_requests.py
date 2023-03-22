@@ -28,7 +28,7 @@ async def add(bot, message):
   #  print(st.text)
     s = requests.Session()
     re = s.post(url, data)
-    print(re)
+    print(re.text)
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

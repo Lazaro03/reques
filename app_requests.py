@@ -19,9 +19,10 @@ bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 async def add(bot, message):
     send = message.reply
     username = message.from_user.username
+    await send("Iniciando")
     url = "https://eduvirtual.uho.edu.cu"
     s = requests.post(url)
-    result = s.json()
+    result = s.text
     await send(result)
 
 

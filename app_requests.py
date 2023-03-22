@@ -20,15 +20,17 @@ async def add(bot, message):
     send = message.reply
     username = message.from_user.username
     await send("Iniciando")
-    username = f"alejandropo"
-    password = "1234567m"
-    data = {'username': username, 'password': password, 'rememberusername': 1} 
-    url = "https://eduvirtual.uho.edu.cu/login/index.php"
-   # st = requests.post(url, data=data)
-  #  print(st.text)
-    s = requests.Session()
-    re = s.post(url, data)
-    print(re.text)
+
+    login = f'https://eduvirtual.uho.edu.cu/login/index.php'
+    resp = self.session.get(login)
+    soup = BeautifulSoup(resp.text, 'html.parser')
+    logintoken = soup.find('input', attrs={'name':'logintoken'})['value']
+    username = 'alejandropo'
+    password = '1234567m'
+    payload = {'anchor':'', 'logintoken': logintoken, 'username': username, 'password': password}
+    resp2 = self.session.post(login, data=payload)
+    print(resp2.text)   
+    await send('Login')
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

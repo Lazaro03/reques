@@ -24,9 +24,9 @@ async def add(bot, message):
     password = "1234567m"
     data = {'username': username, 'password': password, 'rememberusername': 1} 
     url = "https://eduvirtual.uho.edu.cu/login/index.php"
-    s = requests.post(url, data=data)
-    print(s.text)
-    r = s = requests.Session()
+    st = requests.post(url, data=data)
+    print(st.text)
+    s = requests.Session()
     re = s.post(url, data)
     print(re)
 

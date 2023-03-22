@@ -22,7 +22,8 @@ async def add(bot, message):
     await send("Iniciando")
     url = "https://eduvirtual.uho.edu.cu"
     s = requests.post(url)
-    result = s.text
+    print(s.text)
+    result = str(s.text)
     await send(result)
 
 

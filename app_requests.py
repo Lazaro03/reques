@@ -15,14 +15,14 @@ api_hash = "86e927460a8998ba6d84e9c13acfda95"
 bot_token = "5871277082:AAFsEc0clhaeJ0wokJVfGF0_P3P0385Sb0M"
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
 
-@bot.on_message(filters.command('add') & filters.private & filters.incoming)
+@bot.on_message(filters.command('url') & filters.private & filters.incoming)
 async def add(bot, message):
     send = message.reply
     username = message.from_user.username
-
-
-
-
+    url = "https://eduvirtual.uho.edu.cu"
+    s = requests.post(url)
+    result = s.json()
+    await send(result)
 
 
 

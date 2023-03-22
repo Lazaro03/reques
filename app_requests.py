@@ -26,6 +26,9 @@ async def add(bot, message):
     url = "https://eduvirtual.uho.edu.cu/login/index.php"
     s = requests.post(url, data=data)
     print(s.text)
+    r = s = requests.Session()
+    re = s.post(url, data)
+    print(re)
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

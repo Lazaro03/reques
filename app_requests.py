@@ -20,11 +20,12 @@ async def add(bot, message):
     send = message.reply
     username = message.from_user.username
     await send("Iniciando")
-    url = "https://eduvirtual.uho.edu.cu"
-    s = requests.post(url)
+    username = "Luis"
+    password = "kdkdidi"
+    payload = {'username': username, 'password': password, 'rememberusername': 1} 
+    url = "https://eduvirtual.uho.edu.cu/login/index.php"
+    s = requests.post(url, data=data)
     print(s.text)
-    result = str(s.text)
-    await send(result)
 
 
 

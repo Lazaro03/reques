@@ -20,15 +20,15 @@ async def add(bot, message):
     send = message.reply
     username = message.from_user.username
     await send("Iniciando")
-
+    session = requests.Session()
     login = f'https://eduvirtual.uho.edu.cu/login/index.php'
-    resp = self.session.get(login)
+    resp = session.get(login)
     soup = BeautifulSoup(resp.text, 'html.parser')
     logintoken = soup.find('input', attrs={'name':'logintoken'})['value']
     username = 'alejandropo'
     password = '1234567m'
     payload = {'anchor':'', 'logintoken': logintoken, 'username': username, 'password': password}
-    resp2 = self.session.post(login, data=payload)
+    resp2 = session.post(login, data=payload)
     print(resp2.text)   
     await send('Login')
 

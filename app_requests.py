@@ -49,6 +49,14 @@ async def add(bot, message):
         resp3 = session.post(url1, headers=header)
         print(resp3.text)
         await send("Estás en el perfil")
+        await send("Intentando subir archivo")
+        suba = f'https://santiago.uo.edu.cu/index.php/stgo/$$$call$$$/grid/files/submission-documents/submission-documents-files-grid/upload-file'
+        file = "app.py"
+        with open(file, 'rb') as f:
+            filed = {'files[]': f}
+            resp4 = session.post(suba, files=filed)
+            r = resp4.status_code
+            print(r.text)
     else:
         await send("login error")
 

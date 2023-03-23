@@ -26,20 +26,20 @@ async def add(bot, message):
     await send("Iniciando")
     session = requests.Session()
     header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'}
-    url = f"https://eduvirtual.uho.edu.cu/login/index.php"
-    resp = session.get(url, headers=header)
-    soup = s(resp.text,'html.parser')
-    ltoken = soup.find("input", attrs={"name": "logintoken"})['value']
-    await send(ltoken)
+    url = f"http://roa.ult.edu.cu/jspui/password-login"
+  #  resp = session.get(url, headers=header)
+  #  soup = s(resp.text,'html.parser')
+  #  ltoken = soup.find("input", attrs={"name": "logintoken"})['value']
+  #  await send(ltoken)
     data = {
-            "anchor": "",
-            "logintoken": ltoken,
-            "username": "alejandropo@uho.edu.cu",
-            "password": "1234567m",
-            "rememberusername": 1,
+           # "anchor": "",
+           # "logintoken": ltoken,
+            "login_email": "luisadrianes2002@gmail.com",
+            "login_password": "Stvz02**",
+        #    "rememberusername": 1,
         }
     resp2 = session.post(url, headers=header, data=data)
-    if 'loginerrors' in resp2.text:
+    if 'válida' in resp2.text:
         await send('Datos Erróneos')
         return
     else:

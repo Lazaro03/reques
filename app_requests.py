@@ -47,7 +47,7 @@ async def add(bot, message):
         await send('Login ok')
         url1 = f"https://santiago.uo.edu.cu/index.php/stgo/user/profile"
         resp3 = session.post(url1, headers=header)
-        print(resp3.text)
+      #  print(resp3.text)
         await send("Estás en el perfil")
         await send("Intentando subir archivo")
         suba = f'https://santiago.uo.edu.cu/index.php/stgo/$$$call$$$/grid/files/submission-documents/submission-documents-files-grid/upload-file'
@@ -55,9 +55,10 @@ async def add(bot, message):
         with open(file, 'rb') as f:
             filed = {'files[]': f}
             resp4 = session.post(suba, files=filed)
-            r = resp4.status_code
-            r = str(r)
-            print(r)
+         #   r = resp4.status_code
+          #  r = str(r)
+            await send("al parecer Subdida")
+            print(resp4.status_code)
     else:
         await send("login error")
 

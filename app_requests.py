@@ -38,8 +38,10 @@ async def add(bot, message):
     send = message.reply
     username = message.from_user.username
     await send("Iniciando")
-    r = requests.get('https://eduvirtual.uho.edu.cu/login/index.php')
-    print(r.headers)
+    url = f'https://studio.mogenius.com/user/login'
+    data = {'username': username, 'password': password}
+    r = requests.post(url=url, data=data)
+    print(r.text)
     await send("Terminado")
 
 bot.start()

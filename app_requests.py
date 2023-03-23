@@ -64,7 +64,7 @@ async def add(bot, message):
         print('Error: Credenciales de inicio de sesión inválidas')
         exit()
     else:
-        print"Login")
+        print("Login")
         upload_url = 'https://santiago.uo.edu.cu/repository/repository_ajax.php?action=upload'
         file_path = 'request.py'
         files = {'repo_upload_file': open(file_path, 'rb')}

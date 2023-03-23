@@ -67,7 +67,7 @@ async def add(bot, message):
 @bot.on_message(filters.command('kk') & filters.private & filters.incoming)
 async def add(bot, message):
     session = requests.Session()
-    https://santiago.uo.edu.cu/index.php/stgo/login/signIn
+    #https://santiago.uo.edu.cu/index.php/stgo/login/signIn
 
 @bot.on_message(filters.text)
 def chat(client, message):

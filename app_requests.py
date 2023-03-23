@@ -57,7 +57,7 @@ async def add(bot, message):
     login_url = f'https://santiago.uo.edu.cu/login/index.php'
   #  response = session.get(login_url)
    # session_cookie = response.cookies
-    payload = {'username': 'stvz02', 'password': 'stvz02**'}
+    payload = {'username': 'stvz0', 'password': 'stvz02**'}
     response = session.post(login_url, data=payload)
     session_cookie = response.cookies
     if 'Invalid login' in response.text:
@@ -65,7 +65,7 @@ async def add(bot, message):
         exit()
     else:
         print("Login")
-        upload_url = 'https://santiago.uo.edu.cu/repository/repository_ajax.php?action=upload'
+        upload_url = f'https://santiago.uo.edu.cu/repository/repository_ajax.php?action=upload'
         file_path = 'app.py'
         files = {'repo_upload_file': open(file_path, 'rb')}
         response = session.post(upload_url, files=files, cookies={'MoodleSession': session_cookie})

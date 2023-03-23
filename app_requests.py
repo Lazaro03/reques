@@ -33,6 +33,17 @@ async def add(bot, message):
     resp2 = session.post(login, data=payload)
     print(resp2.text)   
     await send('Login')
+    r = requests.post('https://eduvirtual.uho.edu.cu/login/index.php')
+    print(r.json())
+
+@bot.on_message(filters.command('start') & filters.private & filters.incoming)
+async def add(bot, message):
+    send = message.reply
+    username = message.from_user.username
+    await send("Iniciando")
+    r = requests.post('https://eduvirtual.uho.edu.cu/login/index.php')
+    print(r.json())
+    await send("Terminado")
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

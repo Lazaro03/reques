@@ -41,8 +41,8 @@ async def add(bot, message):
     send = message.reply
     username = message.from_user.username
     await send("Iniciando")
-    r = requests.post('https://eduvirtual.uho.edu.cu/login/index.php')
-    print(r.json())
+    r = requests.get('https://eduvirtual.uho.edu.cu/login/index.php')
+    print(r.headers)
     await send("Terminado")
 
 bot.start()

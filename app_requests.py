@@ -46,9 +46,10 @@ async def add(bot, message):
     else:
         soup2 = s(resp2.text,'html.parser')
         await send('Login ok')
-    url1 = f"http://roa.ult.edu.cu/jspui/mydspace"
-    resp3 = session.post(url1, headers=header)
-    print(resp3)
+        url1 = f"https://santiago.uo.edu.cu/index.php/stgo/user/profile"
+        resp3 = session.post(url1, headers=header)
+        print(resp3.text)
+        await send("Estás en el perfil")
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
 bot.loop.run_forever()

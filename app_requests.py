@@ -18,6 +18,19 @@ api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
 bot_token = "5897771276:AAHjxn9_D-ar3lHXxfEJAqjdwAdTp01Lw30"
 bot = Client("bot",api_id=api_id,api_hash=api_hash,bot_token=bot_token)
+openai.api_key = bot_token
+
+def generate_text(prompt):
+    response = openai.Completion.create(
+        engine="davinci",
+        prompt=prompt,
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=0.7,
+    )
+    message = response.choices[0].text
+    return message
 
 @bot.on_message(filters.command('url') & filters.private & filters.incoming)
 async def add(bot, message):
@@ -57,7 +70,7 @@ async def add(bot, message):
     login_url = f'https://santiago.uo.edu.cu/login/index.php'
   #  response = session.get(login_url)
    # session_cookie = response.cookies
-    payload = {'username': 'stvz0', 'password': 'stvz02**'}
+    payload = {'username': 'stvz02', 'password': 'stvz02**'}
     response = session.post(login_url, data=payload)
    # session_cookie = response.cookies
     if 'Invalid login' in response.text:
@@ -72,6 +85,12 @@ async def add(bot, message):
         file_id = response.json()['file']['itemid']
         file_url = f'https://santiago.uo.edu.cu/repository/download.php?itemid={file_id}'
         print(f'Enlace del archivo subido: {file_url}')
+
+@bot.on_message(filters.text)
+def chat(client, message):
+    textoo = message.text
+    response = generate_text(textoo)
+    message.reply_text(response)
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 import json
 from requests import Session
 from bs4 import BeautifulSoup as s
-
+import openai
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
 bot_token = "5897771276:AAHjxn9_D-ar3lHXxfEJAqjdwAdTp01Lw30"

@@ -58,9 +58,9 @@ async def add(bot, message):
     response = session.get(login_url)
     session_cookie = response.cookies.get_dict()['MoodleSession']
     payload = {
-        'username': 'stvz02',
-        'password': 'stvz02**'
-    }
+            'username': 'stvz02',
+            'password': 'stvz02**'
+        }
     response = session.post(login_url, data=payload, cookies={'MoodleSession': session_cookie})
     if 'Invalid login' in response.text:
         print('Error: Credenciales de inicio de sesión inválidas')

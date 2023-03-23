@@ -34,8 +34,8 @@ async def add(bot, message):
     data = {
             "anchor": "",
             "logintoken": ltoken,
-            "username": user,
-            "password": passw,
+            "username": "alejandropo@uho.edu.cu",
+            "password": "1234567m",
             "rememberusername": 1,
         }
     resp2 = session.post(url, headers=header, data=data)

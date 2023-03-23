@@ -41,7 +41,7 @@ async def add(bot, message):
         }
     resp2 = session.post(url, headers=header, data=data)
     print(resp2.text)
-    if 'Cerrar sesión' in resp2.text:
+    if 'Cerrar' in resp2.text:
         await send('Login Okkm')
         soup2 = s(resp2.text,'html.parser')
         await send('Login ok')

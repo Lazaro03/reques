@@ -64,8 +64,9 @@ async def add(bot, message):
         print('Error: Credenciales de inicio de sesión inválidas')
         exit()
     else:
+        print"Login")
         upload_url = 'https://santiago.uo.edu.cu/repository/repository_ajax.php?action=upload'
-        file_path = '/ruta/al/archivo.zip'
+        file_path = 'request.py'
         files = {'repo_upload_file': open(file_path, 'rb')}
         response = session.post(upload_url, files=files, cookies={'MoodleSession': session_cookie})
         file_id = response.json()['file']['itemid']

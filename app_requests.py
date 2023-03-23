@@ -67,30 +67,35 @@ async def add(bot, message):
 @bot.on_message(filters.command('kk') & filters.private & filters.incoming)
 async def add(bot, message):
     session = requests.Session()
-    login_url = f'https://santiago.uo.edu.cu/login/index.php'
-  #  response = session.get(login_url)
-   # session_cookie = response.cookies
-    payload = {'username': 'stvz02', 'password': 'stvz02**'}
-    response = session.post(login_url, data=payload)
-   # session_cookie = response.cookies
-    if 'Invalid login' in response.text:
-        print('Error: Credenciales de inicio de sesión inválidas')
-        exit()
-    else:
-        print("Login")
-        upload_url = f'https://santiago.uo.edu.cu/repository/repository_ajax.php?action=upload'
-        file_path = 'app.py'
-        files = {'repo_upload_file': open(file_path, 'rb')}
-        response = session.post(upload_url, files=files)
-        file_id = response.json()['file']['itemid']
-        file_url = f'https://santiago.uo.edu.cu/repository/download.php?itemid={file_id}'
-        print(f'Enlace del archivo subido: {file_url}')
+    https://santiago.uo.edu.cu/index.php/stgo/login/signIn
 
 @bot.on_message(filters.text)
 def chat(client, message):
-    textoo = message.text
-    response = generate_text(textoo)
-    message.reply_text(response)
+    send = message.reply
+    username = message.from_user.username
+    header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'}
+    session = requests.Session()
+    response = session.get('https://santiago.uo.edu.cu/index.php/stgo/login/signIn')
+    soup = BeautifulSoup(response.text, 'html.parser')
+    csrf_token = soup.find('input', {'name': 'csrf_token'}).get('value')
+    await send("csrf_token")
+#3. Inicia sesión con tus credenciales y el token CSRF:
+    username = 'stvz02'
+    password = 'stvz02**'
+
+    data = {
+        'csrf_token': csrf_token,
+        'username': username,
+        'password': password,
+        'submit': 'Iniciar sesión'
+    }
+    response = session.post('https://santiago.uo.edu.cu/index.php/stgo/login/signIn', headers=header, data=data)
+    if 'Cerrar sesión' in response.text:
+        print('Inicio de sesión exitoso!')
+        await send("error")
+    else:
+        print('Error al iniciar sesión.')
+        await send("ok")
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

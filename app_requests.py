@@ -54,14 +54,12 @@ async def add(bot, message):
 @bot.on_message(filters.command('kk') & filters.private & filters.incoming)
 async def add(bot, message):
     session = requests.Session()
-    login_url = 'https://santiago.uo.edu.cu/login/index.php'
-    response = session.get(login_url)
+    login_url = f'https://santiago.uo.edu.cu/login/index.php'
+  #  response = session.get(login_url)
+   # session_cookie = response.cookies
+    payload = {'username': 'stvz02', 'password': 'stvz02**'}
+    response = session.post(login_url, data=payload)
     session_cookie = response.cookies
-    payload = {
-            'username': 'stvz02',
-            'password': 'stvz02**'
-        }
-    response = session.post(login_url, data=payload, cookies={'MoodleSession': session_cookie})
     if 'Invalid login' in response.text:
         print('Error: Credenciales de inicio de sesión inválidas')
         exit()

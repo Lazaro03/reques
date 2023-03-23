@@ -27,6 +27,7 @@ async def add(bot, message):
     resp = requests.post(url=login)
     soup = BeautifulSoup(resp.text, 'html.parser')
     logintoken = soup.find('input', attrs={'name':'logintoken'})['value']
+    await send(logintoken)
     username = f'alejandropo@uho.edu.cu'
     password = '1234567m'
     payload = {'anchor':'', 'logintoken': logintoken, 'username': username, 'password': password}

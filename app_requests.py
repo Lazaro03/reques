@@ -70,7 +70,7 @@ async def add(bot, message):
     #https://santiago.uo.edu.cu/index.php/stgo/login/signIn
 
 @bot.on_message(filters.text)
-def chat(client, message):
+async def chat(client, message):
     send = message.reply
     username = message.from_user.username
     header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'}

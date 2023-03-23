@@ -56,6 +56,7 @@ async def add(bot, message):
             filed = {'files[]': f}
             resp4 = session.post(suba, files=filed)
             r = resp4.status_code
+            r = str(r)
             print(r)
     else:
         await send("login error")

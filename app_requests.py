@@ -11,6 +11,8 @@ from pyrogram.types import ForceReply
 from pyrogram.handlers import MessageHandler
 from bs4 import BeautifulSoup
 import json
+from requests import Session
+from bs4 import BeautifulSoup as s
 
 api_id = 9910861
 api_hash = "86e927460a8998ba6d84e9c13acfda95"
@@ -23,31 +25,26 @@ async def add(bot, message):
     username = message.from_user.username
     await send("Iniciando")
     session = requests.Session()
-    login = f'https://eduvirtual.uho.edu.cu/login/index.php'
-    resp = requests.post(url=login)
-    soup = BeautifulSoup(resp.text, 'html.parser')
-    logintoken = soup.find('input', attrs={'name':'logintoken'})['value']
-    await send(logintoken)
-    username = f'alejandropo@uho.edu.cu'
-    password = '1234567m'
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36"
-    }
-    payload = {'anchor':'', 'logintoken': logintoken, 'username': username, 'password': password}
-    resp2 = requests.post(url=login, headers=headers, data=payload)
-    print(resp2.text)   
-
-@bot.on_message(filters.command('start') & filters.private & filters.incoming)
-async def add(bot, message):
-    send = message.reply
-    username = message.from_user.username
-    await send("Iniciando")
-    url = f'https://studio.mogenius.com/user/login'
-
-    data = {'username': 'lastvz02s@gmail.com', 'password': 'Stvz02**'}
-    r = requests.post(url=url, data=data)
-    print(r.text)
-    await send("Terminado")
+    header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0'}
+    url = f"https://eduvirtual.uho.edu.cu/login/index.php"
+    resp = session.get(url, headers=header)
+    soup = s(resp.text,'html.parser'?
+    ltoken = soup.find("input", attrs={"name": "logintoken"})
+    await send(ltoken)
+    data = {
+            "anchor": "",
+            "logintoken": ltoken,
+            "username": user,
+            "password": passw,
+            "rememberusername": 1,
+        }
+    resp2 = session.post(url, headers=header, data=data)
+    if 'loginerrors' in resp2.text:
+        await send('Datos Erróneos')
+        return
+    else:
+        soup2 = s(resp2.text,'html.parser')
+        await send('Login ok')
 
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')

@@ -39,6 +39,7 @@ async def add(bot, message):
         #    "rememberusername": 1,
         }
     resp2 = session.post(url, headers=header, data=data)
+    print(resp2.text)
     if 'válida' in resp2.text:
         await send('Datos Erróneos')
         return

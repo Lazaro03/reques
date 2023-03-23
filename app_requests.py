@@ -56,7 +56,7 @@ async def add(bot, message):
     session = requests.Session()
     login_url = 'https://santiago.uo.edu.cu/login/index.php'
     response = session.get(login_url)
-    session_cookie = response.cookies.get_dict()['MoodleSession']
+    session_cookie = response.cookies
     payload = {
             'username': 'stvz02',
             'password': 'stvz02**'

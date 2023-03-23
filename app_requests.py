@@ -29,7 +29,7 @@ async def add(bot, message):
     url = f"https://eduvirtual.uho.edu.cu/login/index.php"
     resp = session.get(url, headers=header)
     soup = s(resp.text,'html.parser')
-    ltoken = soup.find("input", attrs={"name": "logintoken"})
+    ltoken = soup.find("input", attrs={"name": "logintoken"})['value']
     await send(ltoken)
     data = {
             "anchor": "",

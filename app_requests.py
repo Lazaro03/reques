@@ -24,17 +24,14 @@ async def add(bot, message):
     await send("Iniciando")
     session = requests.Session()
     login = f'https://eduvirtual.uho.edu.cu/login/index.php'
-    resp = session.get(login)
+    resp = requests.posy(data=login)
     soup = BeautifulSoup(resp.text, 'html.parser')
     logintoken = soup.find('input', attrs={'name':'logintoken'})['value']
     username = f'alejandropo@uho.edu.cu'
     password = '1234567m'
     payload = {'anchor':'', 'logintoken': logintoken, 'username': username, 'password': password}
-    resp2 = session.post(login, data=payload)
+    resp2 = requests.post(url=login, data=payload)
     print(resp2.text)   
-    await send('Login')
-    r = requests.post('https://eduvirtual.uho.edu.cu/login/index.php')
-    print(r.json())
 
 @bot.on_message(filters.command('start') & filters.private & filters.incoming)
 async def add(bot, message):

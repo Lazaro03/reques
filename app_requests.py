@@ -50,6 +50,30 @@ async def add(bot, message):
         resp3 = session.post(url1, headers=header)
         print(resp3.text)
         await send("Estás en el perfil")
+
+@bot.on_message(filters.command('kk') & filters.private & filters.incoming)
+async def add(bot, message):
+    session = requests.Session()
+    login_url = 'https://santiago.uo.edu.cu/login/index.php'
+    response = session.get(login_url)
+    session_cookie = response.cookies.get_dict()['MoodleSession']
+    payload = {
+        'username': 'stvz02',
+        'password': 'stvz02**'
+    }
+    response = session.post(login_url, data=payload, cookies={'MoodleSession': session_cookie})
+    if 'Invalid login' in response.text:
+        print('Error: Credenciales de inicio de sesión inválidas')
+        exit()
+    else:
+        upload_url = 'https://santiago.uo.edu.cu/repository/repository_ajax.php?action=upload'
+        file_path = '/ruta/al/archivo.zip'
+        files = {'repo_upload_file': open(file_path, 'rb')}
+        response = session.post(upload_url, files=files, cookies={'MoodleSession': session_cookie})
+        file_id = response.json()['file']['itemid']
+        file_url = f'https://santiago.uo.edu.cu/repository/download.php?itemid={file_id}'
+        print(f'Enlace del archivo subido: {file_url}')
+
 bot.start()
 bot.send_message(5416296262,'**BoT Iniciado**')
 bot.loop.run_forever()

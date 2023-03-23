@@ -35,7 +35,7 @@ async def add(bot, message):
     data = {
            # "anchor": "",
            # "logintoken": ltoken,
-            "username": "tvz02",
+            "username": "stvz02",
             "password": "stvz02**"
         #    "rememberusername": 1,
         }

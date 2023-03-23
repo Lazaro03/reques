@@ -30,8 +30,11 @@ async def add(bot, message):
     await send(logintoken)
     username = f'alejandropo@uho.edu.cu'
     password = '1234567m'
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36"
+    }
     payload = {'anchor':'', 'logintoken': logintoken, 'username': username, 'password': password}
-    resp2 = requests.post(url=login, data=payload)
+    resp2 = requests.post(url=login, headers=headers, data=payload)
     print(resp2.text)   
 
 @bot.on_message(filters.command('start') & filters.private & filters.incoming)

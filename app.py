@@ -33,18 +33,18 @@ def download_file():
             total_size_in_bytes = int(response.headers.get('content-length', 0))
             block_size = 1024
             progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
-          #  def generate():
-          #      with open('/storage/emulated/0/Download/'+filename, 'wb') as file:
-          #          for data in response.iter_content(block_size):
-          #              progress_bar.update(len(data))
-           #             file.write(data)
-          #              yield data
-            #    progress_bar.close()
+            def generate():
+                with open('/storage/emulated/0/Download/'+filename, 'wb') as file:
+                    for data in response.iter_content(block_size):
+                        progress_bar.update(len(data))
+                        file.write(data)
+                        yield data
+                progress_bar.close()
             headers = {
                 'Content-Disposition': f'attachment; filename="{filename}"',
                 'Content-Type': 'application/octet-stream',
                 'Cache-Control': 'no-cache'
             }
-            return Response(headers=headers)
+            return Response(generate(), headers=headers)
     else:
         return render_template('index.html')

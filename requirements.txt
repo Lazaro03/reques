@@ -7,4 +7,3 @@ flask
 gunicorn
 pyrogram
 tqdm
-json

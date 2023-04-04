@@ -34,12 +34,12 @@ def download_file():
             block_size = 1024
             progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
             def generate():
-                with open('/storage/emulated/0/Download/'+filename, 'wb') as file:
-                    for data in response.iter_content(block_size):
-                        progress_bar.update(len(data))
-                        file.write(data)
-                        yield data
-                progress_bar.close()
+          #      with open('/storage/emulated/0/Download/'+filename, 'wb') as file:
+          #          for data in response.iter_content(block_size):
+          #              progress_bar.update(len(data))
+           #             file.write(data)
+          #              yield data
+            #    progress_bar.close()
             headers = {
                 'Content-Disposition': f'attachment; filename="{filename}"',
                 'Content-Type': 'application/octet-stream',

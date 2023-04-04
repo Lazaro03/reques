@@ -1,6 +1,6 @@
 import os
-from flask import Flask, request, render_template, send_file
-from io import BytesIO
+
+from flask import Flask, request, render_template, Response
 from tqdm import tqdm
 import requests
 import json
@@ -33,12 +33,18 @@ def download_file():
             total_size_in_bytes = int(response.headers.get('content-length', 0))
             block_size = 1024
             progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
-            file_data = BytesIO()
-            for data in response.iter_content(block_size):
-                progress_bar.update(len(data))
-                file_data.write(data)
-            progress_bar.close()
-            file_data.seek(0)
-            return send_file(file_data, attachment_filename=filename, as_attachment=True)
+            def generate():
+                with open('/storage/emulated/0/Download/'+filename, 'wb') as file:
+                    for data in response.iter_content(block_size):
+                        progress_bar.update(len(data))
+                        file.write(data)
+                        yield data
+                progress_bar.close()
+            headers = {
+                'Content-Disposition': f'attachment; filename="{filename}"',
+                'Content-Type': 'application/octet-stream',
+                'Cache-Control': 'no-cache'
+            }
+            return Response(generate(), headers=headers)
     else:
         return render_template('index.html')

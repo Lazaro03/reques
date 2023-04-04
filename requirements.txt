@@ -1,9 +1,7 @@
-openai
 bs4==0.0.1
 ujson
 requests
 requests[socks] 
 flask
 gunicorn
-pyrogram
 tqdm

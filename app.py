@@ -1,15 +1,14 @@
 import os
+from flask import Flask, request, render_template
+from tqdm import tqdm
+import requests
+import json
 from flask import Flask
 app = Flask(__name__)
 
 @app.route('/l')
 def hello_world():
    return '𝐇𝐨𝐥𝐚, 𝐃𝐞 𝐀𝐧𝐭𝐞𝐦𝐚𝐧𝐨 𝐆𝐫𝐚𝐜𝐢𝐚𝐬 𝐩𝐨𝐫 𝐌𝐚𝐧𝐭𝐞𝐫 𝐌𝐢 𝐒𝐞𝐫𝐯𝐢𝐜𝐢𝐨 𝐀𝐜𝐭𝐢𝐯𝐨 😊 𝐄𝐫𝐞𝐬 𝐍𝐮𝐞𝐬𝐭𝐫𝐚 𝐑𝐚𝐳𝐨́𝐧 𝐃𝐞 𝐒𝐞𝐫'
-
-from flask import Flask, request, render_template
-from tqdm import tqdm
-import requests
-import json
 
 
 @app.route('/', methods=['GET', 'POST'])

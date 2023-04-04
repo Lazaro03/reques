@@ -1,15 +1,11 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_file
+from io import BytesIO
 from tqdm import tqdm
 import requests
 import json
-from flask import Flask
+
 app = Flask(__name__)
-
-@app.route('/l')
-def hello_world():
-   return '𝐇𝐨𝐥𝐚, 𝐃𝐞 𝐀𝐧𝐭𝐞𝐦𝐚𝐧𝐨 𝐆𝐫𝐚𝐜𝐢𝐚𝐬 𝐩𝐨𝐫 𝐌𝐚𝐧𝐭𝐞𝐫 𝐌𝐢 𝐒𝐞𝐫𝐯𝐢𝐜𝐢𝐨 𝐀𝐜𝐭𝐢𝐯𝐨 😊 𝐄𝐫𝐞𝐬 𝐍𝐮𝐞𝐬𝐭𝐫𝐚 𝐑𝐚𝐳𝐨́𝐧 𝐃𝐞 𝐒𝐞𝐫'
-
 
 @app.route('/', methods=['GET', 'POST'])
 def download_file():
@@ -19,8 +15,7 @@ def download_file():
             'username': "stvz02",
             'password': "stvz02**"
         }
-        a = session.post("https://anuarioeco.uo.edu.cu/index.php/aeco/login/signIn", data=login_data)
-        print(a.text)
+        session.post("https://anuarioeco.uo.edu.cu/index.php/aeco/login/signIn", data=login_data)
         input_str = request.form['files']
         try:
             files_dict = json.loads(input_str)
@@ -38,12 +33,12 @@ def download_file():
             total_size_in_bytes = int(response.headers.get('content-length', 0))
             block_size = 1024
             progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
-            with open('/storage/emulated/0/Download/'+filename, 'wb') as file:
-                for data in response.iter_content(block_size):
-                    progress_bar.update(len(data))
-                    file.write(data)
+            file_data = BytesIO()
+            for data in response.iter_content(block_size):
+                progress_bar.update(len(data))
+                file_data.write(data)
             progress_bar.close()
-        return 'Archivos descargados exitosamente!'
+            file_data.seek(0)
+            return send_file(file_data, attachment_filename=filename, as_attachment=True)
     else:
         return render_template('index.html')
-

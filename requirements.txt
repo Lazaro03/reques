@@ -6,3 +6,5 @@ requests[socks]
 flask
 gunicorn
 pyrogram
+tqdm
+json

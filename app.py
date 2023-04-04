@@ -19,7 +19,8 @@ def download_file():
             'username': "stvz02",
             'password': "stvz02**"
         }
-        session.post("https://anuarioeco.uo.edu.cu/index.php/aeco/login/signIn", data=login_data)
+        a = session.post("https://anuarioeco.uo.edu.cu/index.php/aeco/login/signIn", data=login_data)
+        print(a.text)
         input_str = request.form['files']
         try:
             files_dict = json.loads(input_str)

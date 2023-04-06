@@ -15,7 +15,7 @@ def download_file():
             'username': "stvz02",
             'password': "stvz02**"
         }
-        session.post("https://anuarioeco.uo.edu.cu/index.php/aeco/login/signIn", data=login_data)
+        session.post("https://revistas.udg.co.cu/index.php/olimpia/login/signIn", data=login_data)
         input_str = request.form['files']
         try:
             files_dict = json.loads(input_str)
@@ -27,7 +27,7 @@ def download_file():
         for file_dict in files_dict:
             id_archive = file_dict["id"]
             filename = file_dict["name"]
-            download_url = f'https://anuarioeco.uo.edu.cu/index.php/aeco/$$$call$$$/api/file/file-api/download-file?submissionFileId={id_archive}&submissionId=5736&stageId=1'
+            download_url = f'https://revistas.udg.co.cu/index.php/olimpia/$$$call$$$/api/file/file-api/download-file?fileId={id_archive}&revision=1&submissionId=3880&stageId=1'
             response = session.head(download_url)
             response = session.get(download_url, stream=True)
             total_size_in_bytes = int(response.headers.get('content-length', 0))
